@@ -2,9 +2,9 @@
 
 | Student's name | SCIPER |
 | -------------- | ------ |
-| | |
-| | |
-| | |
+| Berger Thomas | 287838 |
+| Bouquet Pierre | |
+| Walt Eliot| |
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
@@ -12,27 +12,37 @@
 
 **10% of the final grade**
 
-This is a preliminary milestone to let you set up goals for your final project and assess the feasibility of your ideas.
-Please, fill the following sections about your project.
-
-*(max. 2000 characters per section)*
-
 ### Dataset
 
-> Find a dataset (or multiple) that you will explore. Assess the quality of the data it contains and how much preprocessing / data-cleaning it will require before tackling visualization. We recommend using a standard dataset as this course is not about scraping nor data processing.
->
-> Hint: some good pointers for finding quality publicly available datasets ([Google dataset search](https://datasetsearch.research.google.com/), [Kaggle](https://www.kaggle.com/datasets), [OpenSwissData](https://opendata.swiss/en/), [SNAP](https://snap.stanford.edu/data/) and [FiveThirtyEight](https://data.fivethirtyeight.com/)), you could use also the DataSets proposed by the ENAC (see the Announcements section on Zulip).
+Our work will focus on the "Formula 1 World Championship (1950 - 2021)" dataset extracted from [Kaggle](https://www.kaggle.com/rohanrao/formula-1-world-championship-1950-2020).
+
+The dataset contains all the information about races, drivers, circuits and constructors over more than 70 years of racing. Adiitionnally, the data set contains all the points received after each race by the drivers and the constructors. Furthermore, for some years it even contains all the  qualifying (1994-2021), lap times (1996-2021), pit stops(2011-2021) informations.
+This dataset is already clean and ready to use, a data exploration will be needed to get a grasp on how the data is organised and what visualisation is possible to achieve.
+ 
 
 ### Problematic
 
-> Frame the general topic of your visualization and the main axis that you want to develop.
-> - What am I trying to show with my visualization?
-> - Think of an overview for the project, your motivation, and the target audience.
+The main aspect we would like to show with our visualisation is the gigantic history of Formula 1 racing. We want the general public to get a grasp on how Formula 1 evolved through time, and discover more details about the tracks and how performnce is always increasing.<br>
+We also want the "hardcore" fan to be able to explore history of racing discovering interesting fact they didn't know. See achievements of well known pilots, or analyse past seasons or races.
+
+Therefore we think about multiple views we would like to cover.
+ - Geographic positions and evolution of tracks through time.
+ - Details about tracks ( SVG, best times through history , ...)
+ - List of best pilots sorted by (wins, ratio win/race, number of best time, ...)
+ - Pilots details (evolution through years)
+ - Past seasons overview (Driver standings, constructors standings, race locations)
+ - Past races overview (time deltas, podium , best time)     si on est chaud major crash, weather, tires ,
+
+The main idea is to be able to see general data allowing you to understand general history of f1 and be able to dive in really precise points you want to know about.
+
 
 ### Exploratory Data Analysis
 
-> Pre-processing of the data set you chose
-> - Show some basic statistics and get insights about the data
+We explored the data through different point of view as that's we want to show you can find here some of the main points of our findings.
+To get some more details, see our analysis in this [Jupyter notebook]. We mainly used pandas to explore our dataset.
+
+ - The pilot with biggest number of win is Lewis Hamilton (96 wins)
+ - The pilot with the best Win/race ratio is Lee Wallard (1/2)
 
 ### Related work
 
