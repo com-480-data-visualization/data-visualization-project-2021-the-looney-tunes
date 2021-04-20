@@ -3,7 +3,7 @@
 | Student's name | SCIPER |
 | -------------- | ------ |
 | Berger Thomas | 287838 |
-| Bouquet Pierre | |
+| Bouquet Pierre | 282916 |
 | Walt Eliot| |
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
