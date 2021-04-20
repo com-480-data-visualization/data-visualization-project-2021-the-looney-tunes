@@ -36,7 +36,7 @@ The main idea is to be able to see general data allowing you to understand gener
 
 ### Exploratory Data Analysis
 
-We explored the dataset in this [Jupyter Notebook](./Milestone 1/Exploratory_Data_Analysis.ipynb) using mainly the pandas library.  
+We explored the dataset in this [Jupyter Notebook](/Milestone 1/Exploratory_Data_Analysis.ipynb) using mainly the pandas library.  
 
 ### Related work
 
