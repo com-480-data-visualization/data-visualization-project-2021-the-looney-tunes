@@ -31,12 +31,12 @@ Therefore we think about multiple views we would like to cover.
  - Past seasons overview (Driver standings, constructors standings, race locations)
  - Details about pilots (evolution through years)
 
-The main idea is to be able to see general data allowing you to understand general history of f1 and be able to dive in really precise points you want to know about.
+The main idea is to be able to see general data allowing you to understand general history of F1 and be able to dive in really precise points you want to know about.
 
 
 ### Exploratory Data Analysis
 
-We explored the dataset in this [Jupyter Notebook](Milestone 1/Exploratory_Data_Analysis.ipynb) using mainly the pandas library.  
+We explored the dataset in this [Jupyter Notebook](./Milestone 1/Exploratory_Data_Analysis.ipynb) using mainly the pandas library.  
 
 ### Related work
 
