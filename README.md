@@ -33,6 +33,10 @@ Therefore we think about multiple views we would like to cover.
 
 The main idea is to be able to see general data allowing you to understand general history of F1 and be able to dive in really precise points you want to know about.
 
+The main schematic is to have a page containing a time range and and world map with all circuits locations during this time range.
+ - By clicking on a certain object the page will transform to view the object selected on the linked time range. <br>You can click on a circuit (on the map), on a pilot or on a team (on the second view)
+ - By clicking on a specific date you can view the Pilot standing for this season, the constructor standing for this season and details about this specific Grand Prix (time deltas over lap, ...).<br>The pilot and constructor standing hould be clickable and bring to the detailed view of one pilot over a time range
+
 
 ### Exploratory Data Analysis
 
