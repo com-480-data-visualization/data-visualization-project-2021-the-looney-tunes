@@ -4,7 +4,7 @@
 | -------------- | ------ |
 | Berger Thomas | 287838 |
 | Bouquet Pierre | 282916 |
-| Walt Eliot| |
+| Walt Eliot | 263884 |
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
