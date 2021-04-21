@@ -22,14 +22,15 @@ The dataset is already clean and ready to use, a data exploration will be needed
 
 ### Problematic
 
-The main aspect we would like to show with our visualisation is the gigantic history of Formula 1 racing. We want the general public to get a grasp on how Formula 1 evolved through time, and discover more details about the tracks and how performnce is always increasing.<br>
-We also want the "hardcore" fan to be able to explore history of racing discovering interesting fact they didn't know. To analyse past seasons or races.
+The main aspect we would like to show with our visualisation is the gigantic history of Formula 1 racing. We want the general public to get a grasp on how Formula 1 evolved through time, and discover more details about the tracks and how performance is always increasing.<br>
+We also want the "hardcore" fan to be able to explore history of racing discovering interesting fact they didn't know. By analysing past seasons or races or checking pilots summary.
 
 Therefore we think about multiple views we would like to cover.
  - Geographic positions and evolution of tracks through time.
  - Details about tracks ( SVG, best lap-times through history , ...)
  - Past seasons overview (Driver standings, constructors standings, race locations)
- - Details about pilots (evolution through years)
+ - Details about pilots and constructors (evolution through years)
+ - Details about every grand prix (Podium, time deltas, best lap, ...)
 
 The main idea is to be able to see general data allowing you to understand general history of F1 and be able to dive in really precise points you want to know about.
 
@@ -43,7 +44,7 @@ The main schematic is to have a page containing a time range and and world map w
 <img src="/Images/Stat_View_time_range.jpeg" width="50%" >
 </p>
 
- - By clicking on a specific date you can view the pilot standing for this season, the constructor standing for this season and details about this specific Grand Prix (time deltas over lap, ...).<br>The pilot and constructor standing should be clickable and bring you to the detailed view of one pilot/constructor over the linked time range.<br>
+ - By clicking on a specific date you can view the pilots standing for this season, the constructors standing for this season and details about this specific Grand Prix.<br>The pilot and constructor standing should be clickable and bring you to the detailed view of one pilot/constructor over the linked time range.<br>
 <p align="center">
 <img src="/Images/Stat_View_specific_time.jpeg" width="50%" >
 </p>
