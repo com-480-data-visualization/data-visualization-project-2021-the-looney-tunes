@@ -55,12 +55,15 @@ We explored the dataset in this [Jupyter Notebook](/Milestone_1/Exploratory_Data
 
 ### Related work
 
+##### What others have already done with the data?
 
-> - What others have already done with the data?
-> - Why is your approach original?
-> - What source of inspiration do you take? Visualizations that you found on other websites or magazines (might be unrelated to your data).
-> - In case you are using a dataset that you have already explored in another context (ML or ADA course, semester project...), you are required to share the report of that work to outline the differences with the submission for this class.
+These previous works mainly focus on pilots or constructor history giving insights about the number of win, podium, poles, points, .... However they all present interesting way of interacting with the data.
+ - [Data Visualization](https://f1-goat.herokuapp.com/#!/dashboard) | [Data Story](https://jasonjpaul.squarespace.com/formula-1-data-vis) : This visualization is really well designed and give an interesting overview of pilot performance and small recap about seasons. It also allow you to explore a lot of insight. However some details are unclear and a lot of data may be unclear at first view.
+ - [Data Visualization](https://public.tableau.com/en-us/gallery/visual-history-formula-1) | [Data Story](https://public.tableau.com/en-us/s/blog/2019/07/behind-viz-james-smith-talks-illustrator-tableau-public-and-formula-1) : This visualization is not really interactive but it gives a lot of interesting fact on the whole history of formula 1. It speaks mostly about drivers and contructors but also give small facts about locations, tyres and engines
+ - [Data Visualization](https://davidor.github.io/formula1-lap-charts/#/) | [Data Story](https://github.com/davidor/formula1-lap-charts) : This visualization show how each race evolved through laps. Compare to other similar visualization it's a clear way to see one race with only one graph. The possibility to focus on one driver make graph even easier to understand.
 
+##### Why is your approach original?
+However, our approach is interesting as it focus on a other aspect of formula 1 and give insight on the different locations and race tracks. It will also allow to aggregate data over a custom time-range which was not possible on previous visualization. Finally, ou approach will alow to get details about drivers, constructors and each grandprix all in the same place.
 ## Milestone 2 (7th May, 5pm)
 
 **10% of the final grade**
