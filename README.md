@@ -42,7 +42,7 @@ The main schematic is to have a page containing a time range and and world map w
 
 | Main view | Statistical view with time range | Statistical view with specific time |
 | :---------------: | :--------------------------------------------------: | :------------------------------------------------------: |
-| <img src="/Images/Main_view.jpeg" width="30%" > | <img src="/Images/Stat_View_time_range.jpeg" width="30%" > | <img src="/Images/Stat_View_specific_time.jpeg" width="30%" > |
+| <img src="/Images/Main_view.jpeg" width="80%" > | <img src="/Images/Stat_View_time_range.jpeg" width="80%" > | <img src="/Images/Stat_View_specific_time.jpeg" width="80%" > |
 
 </p>
 
