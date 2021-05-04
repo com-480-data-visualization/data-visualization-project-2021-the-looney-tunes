@@ -1,0 +1,172 @@
+
+/*
+This CSS governs the appearance of our site.
+You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/How_CSS_works
+*/
+
+/*
+This makes the border and padding be counted as part of the element's size.
+https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Box_model
+It switches from
+	https://mdn.mozillademos.org/files/13647/box-model-standard-small.png
+to
+	https://mdn.mozillademos.org/files/13649/box-model-alt-small.png
+*/
+* {
+	box-sizing: border-box;
+}
+
+/*
+Make the document fill the whole viewport, this overrides any weird defaults that browsers might have.
+*/
+html, body, figure {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+
+/* Default font and size */
+body {
+
+	width: 100vw;
+	height: 100vh;
+
+	/* center vertically */
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-content: center;
+
+	/* background behind the plot */
+	background: #111111;
+
+	/* default text */
+	font-family: sans-serif;
+	font-size: 1.1rem;
+}
+
+span {
+  white-space:pre;
+}
+.full-width {
+
+}
+.Header {
+	color: #999999;
+	grid-column: 1/ span 1;
+	grid-row:1;
+	/*border: solid green 1px;*/
+
+}
+.circuitdiv{
+	grid-column: 3/ span 1;
+	grid-row:1;
+	/*border: solid yellow 1px;*/
+}
+.circuitsvg{
+	width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.container {
+	display: grid;
+	grid-template-columns: 60% 2% 35%;
+  grid-template-rows: auto;
+
+}
+.timeline{
+	margin: auto;
+	width: 90%;
+}
+
+.map {
+  margin: auto;
+	width: 90%;
+}
+.plot_circuit_selection {
+  margin: auto;
+	width: 100%;
+}
+
+.area {
+	fill: lightsteelblue;
+}
+
+.axis--grid .domain {
+	fill: #333333;
+	stroke: none;
+}
+
+.axis--x .domain,
+.axis--x .tick line,
+.axis--grid .tick line {
+	stroke: #999999;
+}
+
+.axis--x .tick text {
+	color: #999999;
+	font-weight: bold;
+}
+
+.axis--grid .tick--minor line {
+	stroke-opacity: 1;
+}
+
+
+.graticule {
+	fill: none;
+	stroke: #000;
+	stroke-width: .5px;
+	stroke-opacity: 0;
+}
+.sphere {
+	fill: url(#linear);
+	fill-opacity: 1;
+	stroke: #000;
+	stroke-width: 1px;
+	stroke-opacity: .5;
+}
+.country {
+	fill: #777777;
+	fill-opacity: 1;
+	stroke: #999999;
+	stroke-width: 1px;
+	vector-effect: non-scaling-stroke;
+}
+.tooltip {
+		position: absolute;
+		font-size: 12px;
+		width:  auto;
+		height: auto;
+		pointer-events: none;
+		background-color: #222222;
+		border-radius: 4px;
+}
+
+.circle-hover {
+		stroke: #000;
+		stroke-width: 2px;
+		vector-effect: non-scaling-stroke;
+}
+
+.circle-clicked {
+		fill:#ffffff;
+		stroke: #000;
+		stroke-width: 2px;
+		vector-effect: non-scaling-stroke;
+}
+
+.plotline{
+	fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.plotaxis path,
+.plotaxis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}

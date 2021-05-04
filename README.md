@@ -65,7 +65,8 @@ However, our approach is interesting as it focuses on another aspect of formula 
 
 ## Milestone 2 (7th May, 5pm)
 
-**10% of the final grade**
+The report of milestone 2 can be found here: [Report pdf](/Milestone_2/Report_Milestone2.pdf)
+The website of milestone 2 can be found here:  [Website skeleton](https://com-480-data-visualization.github.io/data-visualization-project-2021-the-looney-tunes/)
 
 
 ## Milestone 3 (4th June, 5pm)
