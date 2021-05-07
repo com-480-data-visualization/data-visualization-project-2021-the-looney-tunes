@@ -1,13 +1,9 @@
 //////////////////////////////////////
 // Parameters
 
-projection = d3.geoRobinson().precision(.1);
-	//geoInterruptedMollweideHemispheres
-	//geoMercator
-	//geoOrthographic
 
 const Mapwidth = 1000; // change in css
-const Mapheight = 1000;
+const Mapheight = 500;
 
 var minYear = "1950"
 var maxYear = "2021"
@@ -17,6 +13,14 @@ init_bigr = 5
 bigr = init_bigr
 init_stroke = 2
 stroke = init_stroke
+
+projection = d3.geoRobinson().precision(0.01).scale(150).translate([Mapwidth / 2, Mapheight / 2]);
+
+  //geoRobinson
+	//geoInterruptedMollweideHemispheres().rotate([30,0])
+	//geoMercator
+	//geoOrthographic
+	//geoWinkel3
 
 var Brushmargin = {top: 5, right: 10, bottom: 20, left: 10}
 var Brushwidth = 1000 - Brushmargin.left - Brushmargin.right;
@@ -37,11 +41,6 @@ g.append("path")
 .attr('class', 'sphere')
 .attr("d", path);
 
-g.append("clipPath")
-.attr("id", "clip")
-.append("use")
-.attr("xlink:href", "#sphere");
-
 const locations = d3.csv('Data_processed/races.csv').then(function(data){return d3.nest()
 	.key(function(d) { return [d.circuitId, d.name,d.lat,d.lng,d.location,d.country]; })
 	.entries(data);});
@@ -52,38 +51,54 @@ const races = d3.csv('Data_processed/laps.csv').then(function(data){return d3.ne
 	.entries(data);});
 
 
-const zoom = d3.zoom().scaleExtent([1, 8]).on('zoom', zoomed)
-Mapsvg.call(zoom).on("dblclick.zoom",reset_zoom)
-
-
-function reset_zoom(){
-	d3.event.transform = d3.zoomIdentity
-	zoomed()
-}
-
-function zoomed(){
-
-	g.selectAll('.country') // To prevent stroke width from scaling
-	.attr('transform', d3.event.transform);
-	g.selectAll('.sphere') // To prevent stroke width from scaling
-	.attr('transform', d3.event.transform);
-	//g.selectAll('path') // To prevent stroke width from scaling
-	//.attr('transform', d3.event.transform);
-
-	r = init_r/d3.event.transform.k
-	bigr = init_bigr/d3.event.transform.k
-	stroke = init_stroke/d3.event.transform.k
-
-	g.selectAll('circle')
-	.attr('r',r)
-	.attr('transform', d3.event.transform)
-	brushend()
-}
-
-
 drawGraticule();
 drawGlobe();
+
+g.append("g")
+.attr("class", "brush")
+.call(d3.brush()
+.extent([[0, 0], [Mapwidth, Mapheight]])
+.on("end",brushMap))
+
+
 updateData(1950,2020)
+
+
+function brushMap(){
+	console.log(d3.event.selection)
+	d = d3.event.selection
+	if (!d) {
+		scale =1
+		g.transition()
+      .duration(750)
+			.attr("transform", "translate(" + [0,0] + ")scale(" + scale + ")");
+	}
+	else{
+			dx = d[1][0] - d[0][0],
+      dy = d[1][1] - d[0][1],
+      xmap = (d[0][0] + d[1][0]) / 2,
+      ymap = (d[0][1] + d[1][1]) / 2,
+      scale = 1 / Math.max(dx / Mapwidth, dy / Mapheight),
+      translate = [Mapwidth / 2 - scale * xmap, Mapheight / 2 - scale * ymap];
+
+		g.transition()
+      .duration(750)
+			.attr("transform", "translate(" + translate + ")scale(" + scale + ")")
+		Mapsvg.select(".brush").call(d3.brush().clear)
+	}
+	r = init_r/Math.pow(scale,3/4)
+	bigr = init_bigr/Math.pow(scale,3/4)
+	stroke = init_stroke/scale
+
+	g.selectAll('circle')
+				.transition()
+	      .duration(750)
+				.attr('r',r)
+
+}
+
+
+
 
 
 //////////////////////////////////////
@@ -95,6 +110,15 @@ var x = d3.scaleTime()
 
 var svg = d3.select("#timescale").attr("transform", "translate(" + Brushmargin.left + ",0)")
 
+svg.append("rect")
+	.attr("x",0)
+	.attr("y", Brushheight)
+	.attr("height", 30)
+	.attr("width", Brushwidth+5)
+	.attr("rx",5 )
+	.style("fill", '#111111')
+	.style("opacity",0.7);
+
 svg.append("g")
 .attr("class", "axis axis--grid")
 .attr("transform", "translate(0," + Brushheight + ")")
@@ -104,6 +128,8 @@ svg.append("g")
 .tickFormat(function() { return null; }))
 .selectAll(".tick")
 .classed("tick--minor", function(d) { return d3.timeYear(); });
+
+
 
 svg.append("g")
 .attr("class", "axis axis--x")
@@ -124,7 +150,7 @@ svg.append("g")
 
 function brushend(){
 	if (!d3.event.sourceEvent) return; // Only transition after input.
-	if (!d3.event.selection) {minYear = "1950";maxYear = "2021";updateData(minYear,maxYear);UpdatePlot(plot_name,plot_besttime,plot_data);return;}; // empty selections = select all.
+	if (!d3.event.selection) {minYear = "1950";maxYear = "2021";updateData(minYear,maxYear);UpdatePlot(plot_id,plot_name);return;}; // empty selections = select all.
 	var d0 = d3.event.selection.map(x.invert),
 	d1 = d0.map(d3.timeYear.round);
 	// If empty when rounded, use floor & ceil instead.
@@ -151,7 +177,7 @@ function brush() {
 	minYear = d3.timeFormat("%Y")(d1[0])
 	maxYear = d3.timeFormat("%Y")(d1[1])
 	updateData(minYear,maxYear)
-	UpdatePlot(plot_name,plot_besttime,plot_data)
+	UpdatePlot(plot_id,plot_name)
 
 
 }
@@ -160,9 +186,8 @@ function brush() {
 // circuit selection
 
 // External value for brushing update
-plot_data=0
+plot_id=0
 plot_name=0
-plot_besttime = 0
 
 var Plotmargin = {
 	top: 20,
@@ -171,35 +196,22 @@ var Plotmargin = {
 	left: 60
 }
 Plotwidth = 1000 - Plotmargin.left - Plotmargin.right;
-Plotheight = 200 - Plotmargin.top - Plotmargin.bottom;
+Plotheight = 400 - Plotmargin.top - Plotmargin.bottom;
 
 const Plotsvg = d3.select("#plot__circuit")
 var Plotx = d3.scaleLinear().range([Plotmargin.left, Plotwidth]);
 var Ploty = d3.scaleLinear().range([Plotheight, Plotmargin.top	]);
 
 function circle_select(d) {
-	g.selectAll(".circle-clicked").classed("circle-clicked", false);
+	g.selectAll("circle")
+	.attr("fill","#D20000")
 
-	this.setAttribute("class", "circle-clicked"); // add hover class to emphasize
-	races.then(function(data){
-		filteredData = []
-		besttime = [-1,Infinity,"No name"]
-		name = d[3]
-		data.forEach(function(v){
-			if(d[0]==v.key){
-				v.values.forEach(function (t){
-						filteredData.push([t.year,t.milliseconds,t.forename + " " + t.surname])
-						if(t.milliseconds<=besttime[1]){
-							besttime=[t.year,t.milliseconds,t.forename + " " + t.surname]
-						}
-					}
-				)}})
-				plot_data=filteredData
-				plot_name=name
-				plot_besttime = besttime
-				UpdatePlot(name,besttime,filteredData)
-			})
-		}
+	this.setAttribute("fill", "#fff"); // add hover class to emphasize
+	plot_id = d[0]
+	plot_name=d[3]
+	UpdatePlot(plot_id,plot_name)
+
+}
 
 //////////////////////////////////////
 // Tool tip
@@ -242,10 +254,10 @@ function drawGlobe() {
 	d3.json('//unpkg.com/world-atlas@1/world/110m.json').then(function(worldData) {
 		g.selectAll(".segment")
 		.data(topojson.feature(worldData, worldData.objects.countries).features)
-		.enter().insert("path", "circle")
+		.enter().insert("path", "g")
 		.attr("class", "country")
 		.attr("clip-path", "url(#clip)")
-		.attr("d", path);
+		.attr("d", path)
 	})
 }
 
@@ -312,47 +324,78 @@ function getCol(matrix, col){
 }
 
 
-function UpdatePlot(name,besttime,data){
-
+function UpdatePlot(id,name){
 	var h1 = document.getElementById("Circuit");
 	var h2 = document.getElementById("Circuit_stat");
 	var img = document.getElementById("circuitsvg");
-	filteredData = []
-	data.forEach(function (d) {
 
-		if (d[0]>=minYear & d[0]<maxYear){
-			filteredData.push(d)
-		}
-	})
+	races.then(function(data){
+		besttime = [-1,Infinity,"No name"]
+		filteredData=[]
+		data.forEach(function(v){
+			if(id==v.key){
+				v.values.forEach(function (t){
+						if (t.year>=minYear & t.year<maxYear){
+							filteredData.push([t.year,t.milliseconds,t.forename + " " + t.surname])
 
-data = filteredData
+							if(t.milliseconds<=besttime[1]){
+								besttime=[t.year,t.milliseconds,t.forename + " " + t.surname]
+						}
+					}}
+				)}})
+			data = filteredData
+
+
 	if (data.length==0){
 
-		h1.innerHTML = "No lap time data for selected circuit."
+		h1.innerHTML = "No lap time data for selected circuit.<br>Lap time were recorded starting from 1996."
 		h2.innerHTML = ""
 		img.src = 'Circuit-svg/No-data.jpg';
-		Plotsvg.selectAll("g").remove()
+		Plotsvg.selectAll("g,path").remove()
 	}
 	else{
 
 	 	h1.innerHTML = name + "  -  " + data[0][0] + "-" + data[data.length-1][0]
-		h2.innerHTML = "Best lap time: "+millisToMinutesAndSeconds(besttime[1])+"   - By: "+besttime[2]+"    - In: "+besttime[0]
+		h2.innerHTML = "Best lap time: "+millisToMinutesAndSeconds(besttime[1],0)+"<br>By: "+besttime[2]+"    - In: "+besttime[0]
 		img.src = 'Circuit-svg/'+name+'.svg';
 
 		Plotx.domain(d3.extent(data, function(d) {return d[0];}))
-		Ploty.domain(d3.extent(data, function(d) {return d[1];}))
+		Ploty.domain([0,d3.extent(data, function(d) {return d[1];})[1]*1.1])
 
-		Plotsvg.selectAll("g").remove()
+		Plotsvg.selectAll("g,path").remove()
 		g_plot = Plotsvg.append("g")
 		    .attr("transform","translate(" + Plotmargin.left + "," + Plotmargin.top + ")");
 
 		g_plot.append("g")
          .attr("transform", "translate(0," + Plotheight + ")")
-         .call(d3.axisBottom(Plotx));
+         .call(d3.axisBottom(Plotx).ticks(data.length).tickFormat(d3.format(".0f")));
 
     g_plot.append("g")
 		.attr("transform", "translate(" + Plotmargin.left + ",0)")
-     .call(d3.axisLeft(Ploty).tickFormat(function(d){return millisToMinutesAndSeconds(d)}));
+     .call(d3.axisLeft(Ploty).ticks(20).tickFormat(function(d,i){return i % 2 === 0 ?  millisToMinutesAndSeconds(d,1): null}));
+
+		 var Tooltip = d3.select("#circuitdiv")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+
+      // Three function that change the tooltip when user hover / move / leave a cell
+      var mouseover = function(d) {
+				var html  = "<span  style='font-weight:bold;color:#999999'> " +d[0]+" - "+ d[2] + " </span><br/>" +
+				"<span  style='font-weight:bold;color:#D20000'> " +  millisToMinutesAndSeconds(d[1],0) +" </span>";
+
+				tooltip.html(html)
+				.style("left", (d3.event.pageX + 15) + "px")
+				.style("top", (d3.event.pageY - 14) + "px")
+				.transition()
+				.duration(200) // ms
+				.style("opacity", 0.9) // started as 0!
+      }
+      var mouseout = function(d) {
+				tooltip.transition()
+				.duration(500) // ms
+				.style("opacity", 0); // don't care about position!
+      }
 
 		Plotsvg.append('g')
         .selectAll("circle")
@@ -363,24 +406,39 @@ data = filteredData
         .attr("cy", function (d) { return Ploty(d[1]); } )
         .attr("r", 5)
 				.attr("transform", "translate(" + Plotmargin.left + "," + Plotmargin.top + ")")
-        .style("fill", "#CC0000");
-/*
-		Plotsvg.append("path")
-      .data(data)
-			.attr("fill", "none")
-      .attr("stroke", "#69b3a2")
-      .attr("stroke-width",10)
-      .attr("d",d3.line()
-        .x(function (d) { console.log( Plotx(d[0]));return Plotx(d[0]); })
-        .y(function (d) { return Ploty(d[1]); }))
+        .style("fill", "#D20000")
+				.on("mouseover", mouseover)
+				.on("mouseout", mouseout);
 
-*/
+	modifieddata=[]
+	data.forEach(function(d){modifieddata.push([Plotx(d[0]),Ploty(d[1])]);})
+	var lineGenerator = d3.line();
+	var pathData = lineGenerator(modifieddata);
+
+	Plotsvg.append("path")
+			.attr("fill", "none")
+      .attr("stroke", "#D20000")
+      .attr("stroke-width",1)
+			.attr("transform", "translate(" + Plotmargin.left + "," + Plotmargin.top + ")")
+      .attr("d",pathData)
 	}
+	})
 }
 
-function millisToMinutesAndSeconds(millis) {
+function millisToMinutesAndSeconds(millis,short) {
   var minutes = Math.floor(millis / 60000);
   var seconds = Math.floor((millis-minutes*60000)/1000);
 	var millis = millis-minutes*60000-seconds*1000
-  return minutes.toString() + "min " + (seconds < 10 ? '0' : '') + seconds.toString() + "secs " + millis.toString()+ "ms";
+	var string = ""
+	if (minutes>=1){
+		string += minutes.toString() + "min "
+	}
+	if (seconds<10){
+		string += "0"
+	}
+	string += seconds.toString() + "secs "
+	if (short==0){
+		string+= millis.toString()+ "ms"
+	}
+  return string;
 }
