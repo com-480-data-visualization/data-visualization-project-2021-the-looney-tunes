@@ -1,5 +1,7 @@
 # Project of Data Visualization (COM-480)
 
+🏎 Formula 1 Visualization 🏎️
+
 | Student's name | SCIPER |
 | -------------- | ------ |
 | Berger Thomas | 287838 |
