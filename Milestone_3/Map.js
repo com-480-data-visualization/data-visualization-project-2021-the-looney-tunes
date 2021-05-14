@@ -47,7 +47,7 @@ const locations = d3.csv('Data_processed/races.csv').then(function(data){return 
 	.entries(data);});
 filteredLocation = []
 
-const circuits_tracks = d3.json("Data/f1-circuits.geojson").then(function(worldData) {return worldData.features})
+const circuits_tracks = d3.json("Data_processed/f1-circuits.geojson").then(function(worldData) {return worldData.features})
 
 const races = d3.csv('Data_processed/laps.csv').then(function(data){return d3.nest()
 	.key(function(d) { return d.circuitId; })
