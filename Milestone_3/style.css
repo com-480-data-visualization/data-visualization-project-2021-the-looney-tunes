@@ -178,10 +178,10 @@ th {
   background-size: cover;
 }
 .icon-mode-dark {
-  background-image: url(Images/dark-mode.svg);
+  background-image: url(./Images/dark-mode.svg);
 }
 .icon-mode-light{
-  background-image: url(Images/light-mode.svg);
+  background-image: url(./Images/light-mode.svg);
 }
 
 rect.selection {
