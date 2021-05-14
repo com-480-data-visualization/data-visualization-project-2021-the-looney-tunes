@@ -68,16 +68,45 @@ However, our approach is interesting as it focuses on another aspect of formula 
 ## Milestone 2 (7th May, 5pm)
 
 The report of milestone 2 can be found here: [Report pdf](/Milestone_2/Report_Milestone2.pdf)<br>
-The website of milestone 2 can be found here:  [Website skeleton](https://com-480-data-visualization.github.io/data-visualization-project-2021-the-looney-tunes/)
+The website of milestone 2 can be found here:  [Website skeleton](https://com-480-data-visualization.github.io/data-visualization-project-2021-the-looney-tunes/Milestone_2/index.html)
 
 
 ## Milestone 3 (4th June, 5pm)
 
 **80% of the final grade**
 
+To see the final website, you can visit the following [link](https://com-480-data-visualization.github.io/data-visualization-project-2021-the-looney-tunes/Milestone_3/index.html). 
 
-## Late policy
+The video showing how the visualization works can be found in the following [link](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
 
-- < 24h: 80% of the grade for the milestone
-- < 48h: 70% of the grade for the milestone
+The process book can be found [here](/Milestone_3/ProcessBook.pdf).
+
+The project is structured as follows:
+
+```       
+├───Data/             				Original dataset used
+├───Images/      				Images used in the readme
+├───Milestone_1/         			Files used for milestone 1
+|    └───Exploratory_Data_Analysis.ipynb 	Notebook used for data exploration.       
+|
+├───Milestone_2/         			Files used for milestone 2
+|    ├───Circuit-svg/				Svg of circuit tracks
+|    ├───Data_processed/			Data_processed for better used in website
+|    ├───favicons/				favicons wor website
+|    └───files				Website files and pdf report        
+|
+├───Milestone_3/         			Files used for milestone 2
+|    ├───Data_processed/			Data_processed for better used in website
+|    ├───favicons/				favicons wor website
+|    ├───Images/				Images used for in the website 
+|    └───files				Website files and pdf report        
+|
+├───index.html: 				html file that redirects to the visualization (to ./Milestone_3/index.html).
+```
+
+To run our project locally, you need to do:
+
+- Clone the repo
+- Move into the `Milestone_3/` folder
+- Start a local server (e.g. using ```python -m http-server```), the website is generally available at ```localhost:8000/```
 
