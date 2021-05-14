@@ -371,7 +371,6 @@ function updateData(minYear,maxYear){
 				if (v.year>=minYear & parseInt(v.year)<=maxYear){
 					id = getCol(filteredLocation,0).indexOf(v.circuitId)
 					if (id==-1){
-
 							filteredLocation.push([v.circuitId,v.location,v.country,v.name,+1,projection([v.lng, v.lat]),v.alt])
 					}
 					else{
@@ -407,6 +406,7 @@ function updateMapPoints(data) {
 	.on("mouseout", tipMouseout)
 
 	g.selectAll("circle")
+	.attr("cursor", "pointer")
 	.on("click", circle_select)
 
 
