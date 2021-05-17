@@ -173,11 +173,14 @@ svg.append("g")
 .call(d3.axisBottom(x)
 .ticks(d3.timeYear)
 .tickSize(-Brushheight)
-.tickFormat(function() { return null; }))
+.tickFormat(function(d) { return null; }))
 .selectAll(".tick")
 .classed("tick--minor", function(d) { return d3.timeYear(); });
 
-
+var ticks = d3.selectAll(".tick");
+ticks.each(function(_,i){
+    if(i%3 !== 0) d3.select(this).attr('opacity',0.5);
+});
 
 svg.append("g")
 .attr("class", "axis axis--x")
@@ -187,7 +190,17 @@ svg.append("g")
 .tickPadding(0))
 .attr("text-anchor", null)
 .selectAll("text")
-.attr("x", 6).attr("transform", "rotate(90) translate(0,-10)")
+.attr("x", 6).attr("transform", "rotate(00) translate(-18,5)")
+
+var ticks = d3.selectAll(".axis--x .tick ");
+ticks.each(function(_,i){
+    if(i%3 !== 0) d3.select(this).attr('opacity',0.5);
+});
+
+var ticks = d3.selectAll(".tick text");
+ticks.each(function(_,i){
+    if(i%3 !== 2) d3.select(this).remove();
+});
 
 svg.append("g")
 .attr("class", "brush")
