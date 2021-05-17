@@ -648,15 +648,21 @@ function UpdatePlot_driver(driver){
 		var h2 = document.getElementById("Circuit_stat");
 
 		Dstanding_D.then(function(data){
-			stats = [0,Infinity,0]
+			stats = [0,Infinity,0,0,0,0,0]
 			filteredData=[]
 			data.forEach(function(v){
 
 				if(driver[0]==v.key){
 					v.values.forEach(function (t){
 							if (t.year>=minYear & t.year<maxYear){
-								filteredData.push([t.year,parseInt(t.position),t.points,t.wins])
+								console.log(t)
+								filteredData.push([t.year,parseInt(t.position),t.points,t.wins,t.podium,t.pole])
 								stats[0] += parseInt(t.wins)
+								stats[3] += parseInt(t.podium)
+								stats[4] += parseInt(t.pole)
+								stats[5] += parseInt(t.racedone)
+								stats[6] += parseInt(t.points)
+
 
 								if(parseInt(t.position)==1){
 									stats[2]+=1
@@ -680,10 +686,10 @@ function UpdatePlot_driver(driver){
 
 			h1.innerHTML = driver[0]
 			if (stats[1]==1){
-					h2.innerHTML = "Number of race won:" + stats[0] + ", Number of championship win: "+ stats[2]
+					h2.innerHTML = "Number of championship won:" + stats[2] + ", Number of race won: "+ stats[0] + ", Number of podium:" + stats[3] + ", Number of pole:" + stats[4] + ", Number of race entries:" + stats[5] + ", Ratio of races won:" + Math.round(stats[0]/stats[5]*100 * 10) / 10 + "%, Number of points:" + stats[6]
 			}
 			else {
-					h2.innerHTML = "Number of race won:" + stats[0] +  ", Best championship final position: "+ stats[1]
+					h2.innerHTML = "Best championship final position: "+ stats[1] + ", Number of race won:" + stats[0] + ", Number of podium:" + stats[3] + ", Number of pole:" + stats[4] + ", Number of race entries:" + stats[5] + ", Ratio of races won:" + Math.round(stats[0]/stats[5]*100 * 10) / 10 + "%, Number of points:" + stats[6]
 			}
 
 
@@ -712,7 +718,8 @@ function UpdatePlot_driver(driver){
 				var mouseover = function(d) {
 					var html  = "<span  style='font-weight:bold;color:var(--Foreground)'> " +d[0]+" </span><br/>" +
 					"<span  style='font-weight:bold;color:var(--Accent)'> Position: " +  d[1] +" </span><br/>" +
-					"<span  style='font-weight:bold;color:var(--Foreground)'> Number of wins: " +  d[3] +", Number of points: "+ d[2]+" </span>";
+					"<span  style='font-weight:bold;color:var(--Foreground)'> Number of wins: " +  d[3] +", Number of points: "+ d[2]+" </span><br/>" +
+					"<span  style='font-weight:bold;color:var(--Foreground)'> Number of podiums: " +  d[4] +", Number of poles: "+ d[5]+" </span>";
 
 					tooltip.html(html)
 					.style("left", (d3.event.pageX + 15) + "px")
@@ -761,16 +768,19 @@ function UpdatePlot_constructor(constructor){
 		var h2 = document.getElementById("Circuit_stat");
 
 		Cstanding_C.then(function(data){
-			stats = [0,Infinity,0]
+			stats = [0,Infinity,0,0,0,0,0]
 			filteredData=[]
 			data.forEach(function(v){
 
 				if(constructor[0]==v.key){
 					v.values.forEach(function (t){
 							if (t.year>=minYear & t.year<maxYear){
-								filteredData.push([t.year,parseInt(t.position),t.points,t.wins])
-
+								filteredData.push([t.year,parseInt(t.position),t.points,t.wins,t.podium,t.pole])
 								stats[0] += parseInt(t.wins)
+								stats[3] += parseInt(t.podium)
+								stats[4] += parseInt(t.pole)
+								stats[5] += parseInt(t.racedone)
+								stats[6] += parseInt(t.points)
 
 								if(parseInt(t.position)==1){
 									stats[2]+=1
@@ -795,10 +805,10 @@ function UpdatePlot_constructor(constructor){
 
 			h1.innerHTML = constructor[0]
 			if (stats[1]==1){
-					h2.innerHTML = "Number of race won:" + stats[0] + ", Number of championship win: "+ stats[2]
+					h2.innerHTML = "Number of championship won:" + stats[2] + ", Number of race won: "+ stats[0] + ", Number of podium:" + stats[3] + ", Number of pole:" + stats[4] + ", Number of race entries:" + stats[5] + ", Ratio of races won:" + Math.round(stats[0]/stats[5]*100 * 10) / 10 + "%, Number of points:" + stats[6]
 			}
 			else {
-					h2.innerHTML = "Number of race won:" + stats[0] +  ", Best championship final position: "+ stats[1]
+					h2.innerHTML = "Best championship final position: "+ stats[1] + ", Number of race won:" + stats[0] + ", Number of podium:" + stats[3] + ", Number of pole:" + stats[4] + ", Number of race entries:" + stats[5] + ", Ratio of races won:" + Math.round(stats[0]/stats[5]*100 * 10) / 10 + "%, Number of points:" + stats[6]
 			}
 
 
