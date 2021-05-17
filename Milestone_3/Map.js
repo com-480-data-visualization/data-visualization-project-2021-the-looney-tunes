@@ -264,9 +264,8 @@ function circle_select(d) {
 		t.forEach((item, i) => {
 			if(item.properties.Name==d[3]){
 				temp=0
-				console.log(item.bbox)
+				d.push(parseInt(item.properties.length)/1000)
 				bbox = [projection([item.bbox[0],item.bbox[1]]),projection([item.bbox[2],item.bbox[3]])]
-				console.log(bbox)
 				dx = bbox[1][0] - bbox[0][0],
 				dy = bbox[1][1] - bbox[0][1],
 				xmap = (bbox[0][0] + bbox[1][0]) / 2,
@@ -455,13 +454,17 @@ function UpdatePlot_circuit(circuit){
 	if (data.length==0){
 
 		h1.innerHTML = circuit[3]
-		h2.innerHTML = "Length: "+0 +"km   Altitude: "+circuit[6] + "m<br>No lap time data for selected circuit and time-range.<br>Lap time were recorded starting from 1996."
+		h2.innerHTML = "Altitude: "+circuit[6] + "m<br>No lap time data for selected circuit and time-range.<br>Lap time were recorded starting from 1996."
 		Plotsvg.selectAll("g,path").remove()
 	}
 	else{
-
 	 	h1.innerHTML = circuit[3] + "  -  " + data[0][0] + "-" + data[data.length-1][0]
-		h2.innerHTML = "Length: "+0 +"km   Altitude: "+circuit[6] + "m<br>Best lap time: "+millisToMinutesAndSeconds(besttime[1],0)+"<br>By: "+besttime[2]+"    - In: "+besttime[0]
+		if (circuit[7]){
+			h2.innerHTML = "Length: "+ circuit[7] +"km   Altitude: "+circuit[6] + "m<br>Best lap time: "+millisToMinutesAndSeconds(besttime[1],0)+"<br>By: "+besttime[2]+"    - In: "+besttime[0]
+		}
+		else{
+			h2.innerHTML = "Altitude: "+circuit[6] + "m<br>Best lap time: "+millisToMinutesAndSeconds(besttime[1],0)+"<br>By: "+besttime[2]+"    - In: "+besttime[0]
+		}
 
 		Plotx.domain(d3.extent(data, function(d) {return d[0];}))
 		Ploty.domain([d3.extent(data, function(d) {return d[1];})[0]*0.8,d3.extent(data, function(d) {return d[1];})[1]*1.1])
@@ -645,7 +648,7 @@ function UpdatePlot_driver(driver){
 		var h2 = document.getElementById("Circuit_stat");
 
 		Dstanding_D.then(function(data){
-			bestpos = Infinity
+			stats = [0,Infinity,0]
 			filteredData=[]
 			data.forEach(function(v){
 
@@ -653,15 +656,19 @@ function UpdatePlot_driver(driver){
 					v.values.forEach(function (t){
 							if (t.year>=minYear & t.year<maxYear){
 								filteredData.push([t.year,parseInt(t.position),t.points,t.wins])
+								stats[0] += parseInt(t.wins)
 
-								if(parseInt(t.position) <= bestpos){
-									bestpos = parseInt(t.position)
+								if(parseInt(t.position)==1){
+									stats[2]+=1
+								}
+
+								if(parseInt(t.position) < stats[1]){
+									stats[1] = parseInt(t.position)
 
 							}
 						}}
 					)}})
 				data = filteredData
-				console.log(data)
 
 		if (data.length==0){
 
@@ -672,11 +679,17 @@ function UpdatePlot_driver(driver){
 		else{
 
 			h1.innerHTML = driver[0]
-			h2.innerHTML = "Number of race win:" + 0 + ", Win ratio: " + 0 + ", Best championship final position: "+ bestpos +", Number of championship win: "+ 0
+			if (stats[1]==1){
+					h2.innerHTML = "Number of race won:" + stats[0] + ", Number of championship win: "+ stats[2]
+			}
+			else {
+					h2.innerHTML = "Number of race won:" + stats[0] +  ", Best championship final position: "+ stats[1]
+			}
+
 
 
 			Plotx.domain(d3.extent(data, function(d) {return d[0];}))
-			Ploty.domain([0,d3.extent(data, function(d) {return d[1];})[1]*1.1])
+			Ploty.domain([1,d3.extent(data, function(d) {return d[1];})[1]*1.1])
 
 			Plotsvg.selectAll("g,path").remove()
 			g_plot = Plotsvg.append("g")
@@ -688,7 +701,7 @@ function UpdatePlot_driver(driver){
 
 			g_plot.append("g")
 			.attr("transform", "translate(" + Plotmargin.left + ",0)")
-			 .call(d3.axisLeft(Ploty).ticks(d3.extent(data, function(d) {return d[1];})[1]).tickFormat(function(d,i){return i === 0 ?   null:d}));
+			 .call(d3.axisLeft(Ploty).ticks(d3.extent(data, function(d) {return d[1];})[1]));
 
 			 var Tooltip = d3.select("#circuitdiv")
 				.append("div")
@@ -748,7 +761,7 @@ function UpdatePlot_constructor(constructor){
 		var h2 = document.getElementById("Circuit_stat");
 
 		Cstanding_C.then(function(data){
-			bestpos = Infinity
+			stats = [0,Infinity,0]
 			filteredData=[]
 			data.forEach(function(v){
 
@@ -757,8 +770,14 @@ function UpdatePlot_constructor(constructor){
 							if (t.year>=minYear & t.year<maxYear){
 								filteredData.push([t.year,parseInt(t.position),t.points,t.wins])
 
-								if(parseInt(t.position) <= bestpos){
-									bestpos = parseInt(t.position)
+								stats[0] += parseInt(t.wins)
+
+								if(parseInt(t.position)==1){
+									stats[2]+=1
+								}
+
+								if(parseInt(t.position) < stats[1]){
+									stats[1] = parseInt(t.position)
 
 							}
 						}}
@@ -775,11 +794,16 @@ function UpdatePlot_constructor(constructor){
 		else{
 
 			h1.innerHTML = constructor[0]
-			h2.innerHTML = "Number of race win:" + 0 + ", Best championship final position: "+ bestpos +", Number of championship win: "+ 0
+			if (stats[1]==1){
+					h2.innerHTML = "Number of race won:" + stats[0] + ", Number of championship win: "+ stats[2]
+			}
+			else {
+					h2.innerHTML = "Number of race won:" + stats[0] +  ", Best championship final position: "+ stats[1]
+			}
 
 
 			Plotx.domain(d3.extent(data, function(d) {return d[0];}))
-			Ploty.domain([0,d3.extent(data, function(d) {return d[1];})[1]*1.1])
+			Ploty.domain([1,d3.extent(data, function(d) {return d[1];})[1]*1.1])
 
 			Plotsvg.selectAll("g,path").remove()
 			g_plot = Plotsvg.append("g")
@@ -791,7 +815,7 @@ function UpdatePlot_constructor(constructor){
 
 			g_plot.append("g")
 			.attr("transform", "translate(" + Plotmargin.left + ",0)")
-			 .call(d3.axisLeft(Ploty).ticks(d3.extent(data, function(d) {return d[1];})[1]).tickFormat(function(d,i){return i === 0 ?   null:d}));
+			 .call(d3.axisLeft(Ploty).ticks(d3.extent(data, function(d) {return d[1];})[1]));
 
 			 var Tooltip = d3.select("#circuitdiv")
 				.append("div")
