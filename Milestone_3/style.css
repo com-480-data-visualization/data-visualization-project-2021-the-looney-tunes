@@ -1,13 +1,13 @@
 .theme-dark {
-  --Background:   #111;
-  --Foreground:   #999;
-  --Midtone: 		  #777;
-  --Accent: 		#D20000;
-  --Secondary: 	#B30000;
-	--extreme1: 		#000;
-	--shady1:				#222;
-	--shady2:				#333;
-	--extreme2:     #fff;
+  --Background:   #8338ec;
+  --Foreground:   #9b5de5;
+  --Midtone: 		  #f15bb5;
+  --Accent: 		#fb5607;
+  --Secondary: 	#ffbe0b;
+	--extreme1: 		#3c096c;
+	--shady1:				#3a86ff;
+	--shady2:				#9d4edd;
+	--extreme2:     #ff006e;
 }
 
 .theme-light {
