@@ -5,7 +5,7 @@
 | Student's name | SCIPER |
 | -------------- | ------ |
 | Berger Thomas | 287838 |
-| Bouquet Pierre | 282916 |
+| Bouquet Pierre | 287916 |
 | Walt Eliot | 263884 |
 
 [Milestone 1](#milestone-1-23rd-april-5pm) • [Milestone 2](#milestone-2-7th-may-5pm) • [Milestone 3](#milestone-3-4th-june-5pm)
@@ -20,7 +20,7 @@ Our work will focus on the "Formula 1 World Championship (1950 - 2021)" dataset 
 
 The dataset contains all the information about races, drivers, circuits, and constructors over more than 70 years of racing. Additionally, the data set contains all the points received after each race by the drivers and the constructors. Furthermore, for some years it even contains all the qualifying (1994-2021), lap-times (1996-2021), pit-stops (2011-2021) information.<br>
 The dataset is already clean and ready to use, a data exploration will be needed to get a grasp on how the data is organized and what visualization is possible to achieve.
- 
+
 
 ### Problematic
 
@@ -75,7 +75,7 @@ The website of milestone 2 can be found here:  [Website skeleton](https://com-48
 
 **80% of the final grade**
 
-To see the final website, you can visit the following [link](https://com-480-data-visualization.github.io/data-visualization-project-2021-the-looney-tunes/Milestone_3/index.html). 
+To see the final website, you can visit the following [link](https://com-480-data-visualization.github.io/data-visualization-project-2021-the-looney-tunes/Milestone_3/index.html).
 
 The video showing how the visualization works can be found in the following [link](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
 
@@ -98,7 +98,7 @@ The project is structured as follows:
 ├───Milestone_3/         			Files used for milestone 2
 |    ├───Data_processed/			Data_processed for better used in website
 |    ├───favicons/				favicons wor website
-|    ├───Images/				Images used for in the website 
+|    ├───Images/				Images used for in the website
 |    └───files				Website files and pdf report        
 |
 ├───index.html: 				html file that redirects to the visualization (to ./Milestone_3/index.html).
@@ -109,4 +109,3 @@ To run our project locally, you need to do:
 - Clone the repo
 - Move into the `Milestone_3/` folder
 - Start a local server (e.g. using ```python -m http-server```), the website is generally available at ```localhost:8000/```
-

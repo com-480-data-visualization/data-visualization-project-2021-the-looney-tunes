@@ -1,6 +1,6 @@
 //////////////////////////////////////
 // Parameters
-setTheme('theme-light')
+setTheme('theme-dark')
 
 const Mapwidth = 1000; // change in css
 const Mapheight = 600;
@@ -33,6 +33,29 @@ const path = d3.geoPath().projection(projection);
 
 const Mapsvg = d3.select("#map")
 const g = Mapsvg.append('g');
+
+// gauge option
+theme =getComputedStyle(document.documentElement)
+
+
+var opts = {
+  angle: 0.18, // The span of the gauge arc
+  lineWidth: 0.1, // The line thickness
+  radiusScale: 0.8, // Relative radius
+  pointer: {
+    length: 0.6, // // Relative to gauge radius
+    strokeWidth: 0.035, // The thickness
+    color: '#000' // Fill color
+  },
+  limitMax: false,     // If false, max value increases automatically if value > maxValue
+  limitMin: false,     // If true, the min value of the gauge will be fixed
+  colorStart: theme.getPropertyValue('--Accent'),   // Colors
+  colorStop: theme.getPropertyValue('--Accent'),    // just experiment with them
+  strokeColor: theme.getPropertyValue('--shady2'),  // to see which ones work best for you
+  generateGradient: false,
+  highDpiSupport: true,     // High resolution support
+
+};
 
 // Sphere (ocean)
 
@@ -698,12 +721,25 @@ function UpdatePlot_driver(driver){
 		else{
 
 			h1.innerHTML = driver[0]
-			if (stats[1]==1){
-					h2.innerHTML = "Number of championship won:" + stats[2] + ", Number of race won: "+ stats[0] + ", Number of podium:" + stats[3] + ", Number of pole:" + stats[4] + ", Number of race entries:" + stats[5] + ", Ratio of races won:" + Math.round(stats[0]/stats[5]*100 * 10) / 10 + "%, Number of points:" + stats[6]
-			}
-			else {
-					h2.innerHTML = "Best championship final position: "+ stats[1] + ", Number of race won:" + stats[0] + ", Number of podium:" + stats[3] + ", Number of pole:" + stats[4] + ", Number of race entries:" + stats[5] + ", Ratio of races won:" + Math.round(stats[0]/stats[5]*100 * 10) / 10 + "%, Number of points:" + stats[6]
-			}
+
+			// Add gauges
+
+			maxs = [100,100,200,98,280,0.5,3900]
+
+      if (stats[1]==1){
+        txt = ["Number of championship won","Number of race won","Number of podium","Number of pole","Number of race entries","Ratio of races won","Number of points"]
+      }
+      else {
+        txt = ["Best championship final position","Number of race won","Number of podium","Number of pole","Number of race entries","Ratio of races won","Number of points"]
+      }
+
+      for (var i = 0; i < txt.length; i++) {
+        var h2 = document.getElementById("gauge" + (i+1));
+        h2.innerHTML = txt[i];
+
+      }
+
+      set_gauges(7,stats,maxs)
 
 
 
@@ -910,4 +946,21 @@ function changetheme() {
 		 setTheme('theme-dark');
 		 document.getElementById("mode").className = "icon icon-mode-light";
    }
+}
+
+function set_gauges(n,stats,maxs){
+
+
+
+
+  var gauges = document.getElementsByClassName("CanvasHeader");
+     for (var i = 0; i < gauges.length; i++) {
+         var el = gauges[i];
+         var gauge = new Donut(el).setOptions(opts);
+         gauge.animationSpeed = 32;
+
+         gauge.maxValue = maxs[i];
+         gauge.set(stats[i]);
+     }
+
 }

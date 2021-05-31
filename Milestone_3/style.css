@@ -67,11 +67,18 @@ span {
   white-space:pre;
 }
 
+.Circuit_stat{
+  display: grid;
+  grid-template-columns: 13vw 13vw 13vw 13vw 13vw 13vw 13vw;
+  grid-template-rows: 8vh;
+  column-gap: 0px;
+  justify-content: stretch;
+}
 
 .containerBig{
 	display: grid;
 	grid-template-columns: 14vw 40vw 30vw 14vw;
-  grid-template-rows: 8vh 84vh 15vh 45vh;
+  grid-template-rows: 8vh 84vh 15vh  15vh 45vh;
 	column-gap: 0px;
   row-gap: 0px;
 	justify-content: stretch;
@@ -109,6 +116,11 @@ th {
 .axis--x .tick line,
 .axis--grid .tick line {
 	stroke: var(--Foreground);
+}
+
+canvas {
+width: 13% !important;
+height: auto !important;
 }
 
 
