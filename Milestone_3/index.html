@@ -56,25 +56,32 @@
 		</div>
 		<div  style="grid-area:3/1/4/5	;justify-self: stretch;align-self: stretch;;"><!-- min(2vh,100vw) -->
 			<h1 id="Circuit" class="Header" style="font-size: min(3.5vh,1.5vw)"></h1>
-			<div style="grid-area:4/2/5/4		;justify-self: stretch;align-self: stretch;overflow:hidden">
+			<!--<div style="	;justify-self: stretch;align-self: stretch;overflow:hidden">-->
+			<div id="nolap"></div>
+			<div id="Circuit_stat" style="grid-area:4/2/5/4;font-size:min(2vh,1.5vw)">
+				<div style="text-align: center"><canvas class="CanvasHeader"></canvas></div>
+				<div style="text-align: center"><canvas class="CanvasHeader"></canvas></div>
+				<div style="text-align: center"><canvas class="CanvasHeader"></canvas></div>
+				<div style="text-align: center"><canvas class="CanvasHeader"></canvas></div>
+				<div style="text-align: center"><canvas class="CanvasHeader"></canvas></div>
+				<div style="text-align: center"><canvas class="CanvasHeader"></canvas></div>
+				<div style="text-align: center"><canvas class="CanvasHeader"></canvas></div>
 
-				<canvas class="CanvasHeader" ></canvas>
-				<canvas class="CanvasHeader" ></canvas>
-				<canvas class="CanvasHeader" ></canvas>
-				<canvas class="CanvasHeader" ></canvas>
-				<canvas class="CanvasHeader" ></canvas>
-				<canvas class="CanvasHeader" ></canvas>
-				<canvas class="CanvasHeader" ></canvas>
+				<div id="gauge1_NUM" style="grid-column:1/2;font-weight: bold;"></div>
+				<div id="gauge2_NUM" style="grid-column:2/3;font-weight: bold;"></div>
+				<div id="gauge3_NUM" style="grid-column:3/4;font-weight: bold;"></div>
+				<div id="gauge4_NUM" style="grid-column:4/5;font-weight: bold;"></div>
+				<div id="gauge5_NUM" style="grid-column:5/6;font-weight: bold;"></div>
+				<div id="gauge6_NUM" style="grid-column:6/7;font-weight: bold;"></div>
+				<div id="gauge7_NUM" style="grid-column:7/8;font-weight: bold;"></div>
 
-			</div>
-		  <div id="Circuit_stat" style="font-size:min(2vh,1.5vw)">
-				<div id="gauge1" style="grid-area:1/1/2/2"> YO</div>
-				<div id="gauge2" style="grid-area:2/1/3/2"> YO</div>
-				<div id="gauge3" style="grid-column:3/4"> YO</div>
-				<div id="gauge4" style="grid-column:4/5"> YO</div>
-				<div id="gauge5" style="grid-column:5/6"> YO</div>
-				<div id="gauge6" style="grid-column:6/7"> YO</div>
-				<div id="gauge7" style="grid-column:7/8"> YO</div>
+				<div id="gauge1" style="grid-column:1/2"></div>
+				<div id="gauge2" style="grid-column:2/3"></div>
+				<div id="gauge3" style="grid-column:3/4"></div>
+				<div id="gauge4" style="grid-column:4/5"></div>
+				<div id="gauge5" style="grid-column:5/6"></div>
+				<div id="gauge6" style="grid-column:6/7"></div>
+				<div id="gauge7" style="grid-column:7/8"></div>
 
 			</div>
 		</div>

@@ -67,12 +67,13 @@ span {
   white-space:pre;
 }
 
-.Circuit_stat{
+#Circuit_stat{
+  text-align: center;
   display: grid;
-  grid-template-columns: 13vw 13vw 13vw 13vw 13vw 13vw 13vw;
+  grid-template-columns: 14vw 14vw 14vw 14vw 14vw 14vw 14vw ;
   grid-template-rows: 8vh;
   column-gap: 0px;
-  justify-content: stretch;
+  justify-content: center;
 }
 
 .containerBig{
@@ -119,7 +120,7 @@ th {
 }
 
 canvas {
-width: 13% !important;
+width: 95% !important;
 height: auto !important;
 }
 
