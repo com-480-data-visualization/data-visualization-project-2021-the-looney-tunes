@@ -80,3 +80,14 @@ t4 = t4.merge(pole,on=['year','constructorId'],how='left').fillna(0)
 t4 = t4.rename(columns={'positionOrder_x': 'podium','positionOrder_y': 'wins','positionOrder': 'racedone','grid': 'pole'})
 
 t4.to_csv(After_data_folder+"/Constructor_standings.csv",index=False,float_format="%d")
+
+# %% Find maximums
+
+
+championshipC = t4[t4['position'] == 1 ].groupby('constructorId')['wins'].count()
+t4 = t4.groupby(['constructorId']).sum()
+t4['ratio'] = t4.wins/t4.racedone
+
+championshipD = t3[t3['position'] == 1 ].groupby('driverId')['wins'].count()
+t3 = t3.groupby(['driverId']).sum()
+t3['ratio'] = t4.wins/t4.racedone

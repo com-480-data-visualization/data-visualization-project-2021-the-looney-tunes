@@ -144,14 +144,12 @@ function brushMap(){
 
 	}
 	else{
-		console.log(d)
 			dx = d[1][0] - d[0][0],
       dy = d[1][1] - d[0][1],
       xmap = (d[0][0] + d[1][0]) / 2,
       ymap = (d[0][1] + d[1][1]) / 2,
       scale = 1 / Math.max(dx / Mapwidth, dy / Mapheight),
       translate = [Mapwidth / 2 - scale * xmap, Mapheight / 2 - scale * ymap];
-console.log(scale,translate)
 		g.transition()
       .duration(750)
 			.attr("transform", "translate(" + translate + ")scale(" + scale + ")")
@@ -309,7 +307,6 @@ function circle_select(d) {
 				scale = 0.3 / Math.max(dx / Mapwidth, dy / Mapheight),
 				translate = [Mapwidth / 2 - scale * xmap, Mapheight / 2 - scale * ymap];
 
-				console.log(scale,translate)
 				g.transition()
 				.duration(750)
 				.attr("transform", "translate(" + translate + ")scale(" +scale + ")")
@@ -493,7 +490,7 @@ function UpdatePlot_circuit(circuit){
     var h2 = document.getElementById("nolap");
     h2.innerHTML = "No lap time data for selected circuit and time-range.<br>Lap time were recorded starting from 1996.";
 		txt = ["Altitude"]
-    maxs=[500]
+    maxs=[2227]
 		Plotsvg.selectAll("g,path").remove()
     stats = [circuit[6]]
 	}
@@ -502,17 +499,15 @@ function UpdatePlot_circuit(circuit){
 
     var h2 = document.getElementById("nolap");
     h2.innerHTML = ""
-    maxs = [100,100,200,98,280,50,3900]
+    maxs = [2227,1]
     stats = [circuit[6],"<br>" +millisToMinutesAndSeconds(besttime[1],0)]
 
     if (stats[7]==1){
       stats.splice(0, 0, circuit[7])
-      maxs = [20,500,1]
+      maxs.splice(0, 0,7004)
       txt = ["Length","Altitude","Best lap time<br>By: "+besttime[2]+"<br>In: "+besttime[0]]
     }
     else {
-
-      maxs = [500,1]
       txt = ["Altitude","Best lap time<br>By: "+besttime[2]+"<br>In: "+besttime[0]]
     }
   }
@@ -521,7 +516,6 @@ function UpdatePlot_circuit(circuit){
       var h2 = document.getElementById("gauge" + (i+1));
       h2.innerHTML = txt[i];
       var h2 = document.getElementById("gauge" + (i+1) + "_NUM");
-      console.log(stats[i])
       h2.innerHTML = stats[i];
     }
     for (var i = txt.length; i < 7; i++) {
@@ -530,8 +524,9 @@ function UpdatePlot_circuit(circuit){
       var h2 = document.getElementById("gauge" + (i+1) + "_NUM");
       h2.innerHTML = "";
     }
-
-    stats[stats["length"]-1] = 72000/besttime[1]
+    if (data.length!=0){
+    stats[stats["length"]-1] = 55404/besttime[1]
+  }
     set_gauges(stats["length"],stats,maxs)
 
     if (data.length!=0){
@@ -691,7 +686,6 @@ function updateTable(){
 }
 
 function driver_select(d) {
-	console.log('driver selction',d)
 	h1 = document.getElementById("plot__circuit");
 	h1.scrollIntoView({block: "end", inline: "nearest",behavior: 'smooth'});
 	driver_plot = d
@@ -702,7 +696,6 @@ function driver_select(d) {
 }
 
 function constructor_select(d) {
-	console.log('driver selction',d)
 	h1 = document.getElementById("plot__circuit");
 	h1.scrollIntoView({block: "end", inline: "nearest",behavior: 'smooth'});
 	driver_plot = 0
@@ -724,7 +717,6 @@ function UpdatePlot_driver(driver){
 				if(driver[0]==v.key){
 					v.values.forEach(function (t){
 							if (t.year>=minYear & t.year<maxYear){
-								console.log(t)
 								filteredData.push([t.year,parseInt(t.position),t.points,t.wins,t.podium,t.pole])
 								stats[1] += parseInt(t.wins)
 								stats[2] += parseInt(t.podium)
@@ -762,8 +754,8 @@ function UpdatePlot_driver(driver){
       h2.innerHTML = ""
 
 			// Add gauges
-      stats[5] = Math.round(stats[1]/stats[4]*100 * 10) / 10
-			maxs = [100,100,200,98,280,50,3900]
+      stats[5] = Math.round(stats[1]/stats[4]*100 * 10) / 10 + "%"
+			maxs = [7,95,165,98,332,50,3778]
 
       if (stats[7]==1){
         txt = ["Number of championship won","Number of race won","Number of podium","Number of pole","Number of race entries","Ratio of races won","Number of points"]
@@ -778,7 +770,6 @@ function UpdatePlot_driver(driver){
       var h2 = document.getElementById("gauge" + (i+1));
       h2.innerHTML = txt[i];
       var h2 = document.getElementById("gauge" + (i+1) + "_NUM");
-      console.log(stats[i])
       h2.innerHTML = stats[i];
     }
     for (var i = txt.length; i < 7; i++) {
@@ -796,7 +787,6 @@ function UpdatePlot_driver(driver){
 
 
 if (data.length!=0){
-  console.log('Plot')
 			Plotx.domain(d3.extent(data, function(d) {return d[0];}))
 			Ploty.domain([1,d3.extent(data, function(d) {return d[1];})[1]*1.1])
 
@@ -897,7 +887,6 @@ function UpdatePlot_constructor(constructor){
 						}}
 					)}})
 				data = filteredData
-				console.log(data)
 
 		if (data.length==0){
 
@@ -914,8 +903,8 @@ function UpdatePlot_constructor(constructor){
       h2.innerHTML = ""
 			h1.innerHTML = constructor[0]
       // Add gauges
-      stats[5] = Math.round(stats[1]/stats[4]*100 * 10) / 10
-			maxs = [100,100,200,98,280,50,3900]
+      stats[5] = Math.round(stats[1]/stats[4]*100 * 10) / 10 +"%"
+			maxs = [16,213,691,203,954,54.5,8346.5]
 
       if (stats[7]==1){
         txt = ["Number of championship won","Number of race won","Number of podium","Number of pole","Number of race entries","Ratio of races won","Number of points"]
@@ -930,7 +919,6 @@ function UpdatePlot_constructor(constructor){
           var h2 = document.getElementById("gauge" + (i+1));
           h2.innerHTML = txt[i];
           var h2 = document.getElementById("gauge" + (i+1) + "_NUM");
-          console.log(stats[i])
           h2.innerHTML = stats[i];
         }
         for (var i = txt.length; i < 7; i++) {
@@ -1040,13 +1028,10 @@ function changetheme() {
 }
 
 function set_gauges(n,stats,maxs){
-  console.log(n)
 
   var gauges = document.getElementsByClassName("CanvasHeader");
   for (var i = n; i < gauges.length; i++) {
-    console.log("yoy",i)
        var el = gauges[i];
-       console.log(el)
        el.getContext('2d').clearRect(0, 0, el.width, el.height);
 
      }
@@ -1057,6 +1042,7 @@ function set_gauges(n,stats,maxs){
          gauge.animationSpeed = 32;
 
          gauge.maxValue = maxs[i];
+         gauge.animationSpeed = 1;
          gauge.set(stats[i]);
        }
 

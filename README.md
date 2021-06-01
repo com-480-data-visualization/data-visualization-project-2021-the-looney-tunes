@@ -84,24 +84,25 @@ The process book can be found [here](/Milestone_3/ProcessBook.pdf).
 The project is structured as follows:
 
 ```       
-├───Data/             				Original dataset used
-├───Images/      				Images used in the readme
-├───Milestone_1/         			Files used for milestone 1
+├───Data/             				       Original dataset used
+├───Images/      				            Images used in the readme
+├───Milestone_1/         		            Files used for milestone 1
 |    └───Exploratory_Data_Analysis.ipynb 	Notebook used for data exploration.       
 |
-├───Milestone_2/         			Files used for milestone 2
-|    ├───Circuit-svg/				Svg of circuit tracks
-|    ├───Data_processed/			Data_processed for better used in website
-|    ├───favicons/				favicons wor website
-|    └───files				Website files and pdf report        
+├───Milestone_2/         			        Files used for milestone 2
+|    ├───Circuit-svg/				        Svg of circuit tracks
+|    ├───Data_processed/			         Data_processed for better used in website
+|    ├───favicons/				           Favicons for website
+|    └───files				               Website files and pdf report        
 |
-├───Milestone_3/         			Files used for milestone 2
-|    ├───Data_processed/			Data_processed for better used in website
-|    ├───favicons/				favicons wor website
-|    ├───Images/				Images used for in the website
-|    └───files				Website files and pdf report        
+├───Milestone_3/         			        Files used for milestone 2
+|    ├───Data_processed/			         Data_processed for better used in website
+|    ├───favicons/				           Favicons for website
+|    ├───Images/				             Images used for in the website
+|    └───files			               	Website files and pdf report        
 |
-├───index.html: 				html file that redirects to the visualization (to ./Milestone_3/index.html).
+├───index.html: 			             	html file that redirects to the visualization
+                                             (to ./Milestone_3/index.html). 
 ```
 
 To run our project locally, you need to do:
