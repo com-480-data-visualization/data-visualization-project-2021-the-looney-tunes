@@ -511,14 +511,18 @@ function UpdatePlot_circuit(circuit){
       txt = ["Altitude","Best lap time<br>By: "+besttime[2]+"<br>In: "+besttime[0]]
     }
   }
+  var h2 = document.getElementById("gauge" + (1));
+  h2.innerHTML = '';
+  var h2 = document.getElementById("gauge" + (1) + "_NUM");
+  h2.innerHTML = "";
 
     for (var i = 0; i < txt.length; i++) {
-      var h2 = document.getElementById("gauge" + (i+1));
+      var h2 = document.getElementById("gauge" + (i+2));
       h2.innerHTML = txt[i];
-      var h2 = document.getElementById("gauge" + (i+1) + "_NUM");
+      var h2 = document.getElementById("gauge" + (i+2) + "_NUM");
       h2.innerHTML = stats[i];
     }
-    for (var i = txt.length; i < 7; i++) {
+    for (var i = txt.length+1; i < 7; i++) {
       var h2 = document.getElementById("gauge" + (i+1));
       h2.innerHTML = '';
       var h2 = document.getElementById("gauge" + (i+1) + "_NUM");
@@ -1028,16 +1032,21 @@ function changetheme() {
 }
 
 function set_gauges(n,stats,maxs){
-
+  pos=0
+if (n<5){
+  pos=1
+  console.log(pos)
+}
   var gauges = document.getElementsByClassName("CanvasHeader");
-  for (var i = n; i < gauges.length; i++) {
+  for (var i = 0; i < gauges.length; i++) {
        var el = gauges[i];
        el.getContext('2d').clearRect(0, 0, el.width, el.height);
 
      }
 
      for (var i = 0; i < n; i++) {
-         var el = gauges[i];
+        console.log(pos)
+         var el = gauges[i+pos];
          var gauge = new Donut(el).setOptions(opts);
          gauge.animationSpeed = 32;
 
