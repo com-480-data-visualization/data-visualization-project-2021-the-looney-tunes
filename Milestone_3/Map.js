@@ -762,11 +762,11 @@ function UpdatePlot_driver(driver){
 			maxs = [7,95,165,98,332,50,3778]
 
       if (stats[7]==1){
-        txt = ["Number of championship won","Number of race won","Number of podium","Number of pole","Number of race entries","Ratio of races won","Number of points"]
+        txt = ["Number of championship won","Number of races won","Number of podium","Number of pole","Number of race entries","Ratio of races won","Number of points"]
       }
       else {
         stats[0] = stats[7]
-        txt = ["Best championship final position","Number of race won","Number of podium","Number of pole","Number of race entries","Ratio of races won","Number of points"]
+        txt = ["Best championship final position","Number of races won","Number of podium","Number of pole","Number of race entries","Ratio of races won","Number of points"]
       }
     }
 
@@ -911,11 +911,11 @@ function UpdatePlot_constructor(constructor){
 			maxs = [16,213,691,203,954,54.5,8346.5]
 
       if (stats[7]==1){
-        txt = ["Number of championship won","Number of race won","Number of podium","Number of pole","Number of race entries","Ratio of races won","Number of points"]
+        txt = ["Number of championship won","Number of races won","Number of podium","Number of pole","Number of race entries","Ratio of races won","Number of points"]
       }
       else {
         stats[0] = stats[7]
-        txt = ["Best championship final position","Number of race won","Number of podium","Number of pole","Number of race entries","Ratio of races won","Number of points"]
+        txt = ["Best championship final position","Number of races won","Number of podium","Number of pole","Number of race entries","Ratio of races won","Number of points"]
       }
     }
 
