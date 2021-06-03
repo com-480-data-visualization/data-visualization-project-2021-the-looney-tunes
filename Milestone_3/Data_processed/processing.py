@@ -84,10 +84,12 @@ t4.to_csv(After_data_folder+"/Constructor_standings.csv",index=False,float_forma
 # %% Find maximums
 
 
-championshipC = t4[t4['position'] == 1 ].groupby('constructorId')['wins'].count()
+championshipC = t4[t4['position'] == 1 ].groupby('constructorId')['position'].count()
 t4 = t4.groupby(['constructorId']).sum()
 t4['ratio'] = t4.wins/t4.racedone
 
-championshipD = t3[t3['position'] == 1 ].groupby('driverId')['wins'].count()
+championshipD = t3[t3['position'] == 1 ].groupby('driverId')['position'].count()
 t3 = t3.groupby(['driverId']).sum()
-t3['ratio'] = t4.wins/t4.racedone
+t3['ratio'] = t3.wins/t3.racedone
+
+ceircuit = pd.read_json(f1-circuits.geojson)
