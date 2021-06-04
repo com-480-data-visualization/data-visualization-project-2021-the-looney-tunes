@@ -77,7 +77,7 @@ The website of milestone 2 can be found here:  [Website skeleton](https://com-48
 
 To see the final website, you can visit the following [link](https://com-480-data-visualization.github.io/data-visualization-project-2021-the-looney-tunes/Milestone_3/index.html).
 
-The video showing how the visualization works can be found in the following [link](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
+The video showing how the visualization works can be found in the following [link](https://www.youtube.com/watch?v=TbKRwhvaats).
 
 The process book can be found [here](/Milestone_3/ProcessBook.pdf).
 
@@ -102,7 +102,7 @@ The project is structured as follows:
 |    └───files			               	Website files and pdf report        
 |
 ├───index.html: 			             	html file that redirects to the visualization
-                                             (to ./Milestone_3/index.html). 
+                                             (to ./Milestone_3/index.html).
 ```
 
 To run our project locally, you need to do:
